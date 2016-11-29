@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ModaBizde" Class="ModalDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-VNOU612\SQLEXPRESS;Initial Catalog=ModaBizde;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ModaBizdeConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Beden" Member="Bedens">
+    <Type Name="Beden">
+      <Column Name="BedenID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BedenBoyu" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Beden_BedenvsUrun" Member="BedenvsUruns" ThisKey="BedenID" OtherKey="BedenID" Type="BedenvsUrun" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BedenvsUrun" Member="BedenvsUruns">
+    <Type Name="BedenvsUrun">
+      <Column Name="BedenID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UrunID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Beden_BedenvsUrun" Member="Beden" ThisKey="BedenID" OtherKey="BedenID" Type="Beden" IsForeignKey="true" />
+      <Association Name="Urun_BedenvsUrun" Member="Urun" ThisKey="UrunID" OtherKey="UrunID" Type="Urun" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Blog" Member="Blogs">
+    <Type Name="Blog">
+      <Column Name="BlogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UyeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BlogAdi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BlogResmi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Tarih" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="OnBilgi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Icerik" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BlogGrubuID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Blog_BlogTag" Member="BlogTags" ThisKey="BlogID" OtherKey="BlogID" Type="BlogTag" />
+      <Association Name="Blog_BlogYorum" Member="BlogYorums" ThisKey="BlogID" OtherKey="BlogID" Type="BlogYorum" />
+      <Association Name="BlogGrubu_Blog" Member="BlogGrubu" ThisKey="BlogGrubuID" OtherKey="BlogGrubuID" Type="BlogGrubu" IsForeignKey="true" />
+      <Association Name="Uye_Blog" Member="Uye" ThisKey="UyeID" OtherKey="UyeID" Type="Uye" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BlogGrubu" Member="BlogGrubus">
+    <Type Name="BlogGrubu">
+      <Column Name="BlogGrubuID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GrupAdi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="BlogGrubu_Blog" Member="Blogs" ThisKey="BlogGrubuID" OtherKey="BlogGrubuID" Type="Blog" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BlogTag" Member="BlogTags">
+    <Type Name="BlogTag">
+      <Column Name="BlogTagID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TagID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Blog_BlogTag" Member="Blog" ThisKey="BlogID" OtherKey="BlogID" Type="Blog" IsForeignKey="true" />
+      <Association Name="Tag_BlogTag" Member="Tag" ThisKey="TagID" OtherKey="TagID" Type="Tag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BlogYorum" Member="BlogYorums">
+    <Type Name="BlogYorum">
+      <Column Name="BlogYorumID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UyeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Yorum" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Tarih" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Blog_BlogYorum" Member="Blog" ThisKey="BlogID" OtherKey="BlogID" Type="Blog" IsForeignKey="true" />
+      <Association Name="Uye_BlogYorum" Member="Uye" ThisKey="UyeID" OtherKey="UyeID" Type="Uye" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Fatura" Member="Faturas">
+    <Type Name="Fatura">
+      <Column Name="FaturaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Tarih" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TcKimlik" Type="System.String" DbType="Char(11)" CanBeNull="true" />
+      <Column Name="KdvOrani" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="ToplamTutar" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="KargoID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OdemeSekli" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Fatura_FaturaDetay" Member="FaturaDetays" ThisKey="FaturaID" OtherKey="FaturaID" Type="FaturaDetay" />
+      <Association Name="Kargo_Fatura" Member="Kargo" ThisKey="KargoID" OtherKey="KargoID" Type="Kargo" IsForeignKey="true" />
+      <Association Name="Musteri_Fatura" Member="Musteri" ThisKey="TcKimlik" OtherKey="TcKimlik" Type="Musteri" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FaturaDetay" Member="FaturaDetays">
+    <Type Name="FaturaDetay">
+      <Column Name="DetayID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FaturaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UrunId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Miktar" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Fatura_FaturaDetay" Member="Fatura" ThisKey="FaturaID" OtherKey="FaturaID" Type="Fatura" IsForeignKey="true" />
+      <Association Name="Urun_FaturaDetay" Member="Urun" ThisKey="UrunId" OtherKey="UrunID" Type="Urun" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kargo" Member="Kargos">
+    <Type Name="Kargo">
+      <Column Name="KargoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="KargoAdi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Aciklama" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Kargo_Fatura" Member="Faturas" ThisKey="KargoID" OtherKey="KargoID" Type="Fatura" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kategori" Member="Kategoris">
+    <Type Name="Kategori">
+      <Column Name="KategoriID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="KategoriAdi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Kategori_UrunGrubu" Member="UrunGrubus" ThisKey="KategoriID" OtherKey="KategoriID" Type="UrunGrubu" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Marka" Member="Markas">
+    <Type Name="Marka">
+      <Column Name="MarkaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MarkaAdi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Marka_Urun" Member="Uruns" ThisKey="MarkaID" OtherKey="MarkaID" Type="Urun" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Musteri" Member="Musteris">
+    <Type Name="Musteri">
+      <Column Name="TcKimlik" Type="System.String" DbType="Char(11) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AdSoyad" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Adres" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Telefon" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Kurum" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Musteri_Fatura" Member="Faturas" ThisKey="TcKimlik" OtherKey="TcKimlik" Type="Fatura" />
+      <Association Name="Musteri_Uye" Member="Uyes" ThisKey="TcKimlik" OtherKey="TcKimlik" Type="Uye" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OneCikanUrunler" Member="OneCikanUrunlers">
+    <Type Name="OneCikanUrunler">
+      <Column Name="CikanID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UrunID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Urun_OneCikanUrunler" Member="Urun" ThisKey="UrunID" OtherKey="UrunID" Type="Urun" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Renk" Member="Renks">
+    <Type Name="Renk">
+      <Column Name="RenkID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RenkAdi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Renk_RenkvsUrun" Member="RenkvsUruns" ThisKey="RenkID" OtherKey="RenkID" Type="RenkvsUrun" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RenkvsUrun" Member="RenkvsUruns">
+    <Type Name="RenkvsUrun">
+      <Column Name="RenkID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UrunID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Renk_RenkvsUrun" Member="Renk" ThisKey="RenkID" OtherKey="RenkID" Type="Renk" IsForeignKey="true" />
+      <Association Name="Urun_RenkvsUrun" Member="Urun" ThisKey="UrunID" OtherKey="UrunID" Type="Urun" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SiparisDurum" Member="SiparisDurums">
+    <Type Name="SiparisDurum">
+      <Column Name="DurumID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FaturaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OnayVeriliyor" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Onaylandi" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="KargoyaVerildi" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IptalEdildi" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Hazirlaniyor" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IadeEdildi" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tag" Member="Tags">
+    <Type Name="Tag">
+      <Column Name="TagID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TagAdi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TagAramaSayisi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Tag_BlogTag" Member="BlogTags" ThisKey="TagID" OtherKey="TagID" Type="BlogTag" />
+      <Association Name="Tag_UrunTag" Member="UrunTags" ThisKey="TagID" OtherKey="TagID" Type="UrunTag" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Urun" Member="Uruns">
+    <Type Name="Urun">
+      <Column Name="UrunID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UrunAdi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BitisSuresi" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BirimFiyat" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MarkaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tarih" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Aciklama" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="GrupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DepoyaGirenMiktar" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KullanilanMiktar" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NetMiktar" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GoruntulenmeSayisi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Begeniler" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FiyatPuani" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DegerPuani" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="KalitePuani" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Urun_BedenvsUrun" Member="BedenvsUruns" ThisKey="UrunID" OtherKey="UrunID" Type="BedenvsUrun" />
+      <Association Name="Urun_FaturaDetay" Member="FaturaDetays" ThisKey="UrunID" OtherKey="UrunId" Type="FaturaDetay" />
+      <Association Name="Urun_OneCikanUrunler" Member="OneCikanUrunlers" ThisKey="UrunID" OtherKey="UrunID" Type="OneCikanUrunler" />
+      <Association Name="Urun_RenkvsUrun" Member="RenkvsUruns" ThisKey="UrunID" OtherKey="UrunID" Type="RenkvsUrun" />
+      <Association Name="Urun_UrunGorseli" Member="UrunGorselis" ThisKey="UrunID" OtherKey="UrunID" Type="UrunGorseli" />
+      <Association Name="Urun_UrunPuan" Member="UrunPuans" ThisKey="UrunID" OtherKey="UrunID" Type="UrunPuan" />
+      <Association Name="Urun_UrunTag" Member="UrunTags" ThisKey="UrunID" OtherKey="UrunID" Type="UrunTag" />
+      <Association Name="Marka_Urun" Member="Marka" ThisKey="MarkaID" OtherKey="MarkaID" Type="Marka" IsForeignKey="true" />
+      <Association Name="UrunGrubu_Urun" Member="UrunGrubu" ThisKey="GrupID" OtherKey="GrupID" Type="UrunGrubu" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UrunGorseli" Member="UrunGorselis">
+    <Type Name="UrunGorseli">
+      <Column Name="GorselID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UrunID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GorselAdres" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Urun_UrunGorseli" Member="Urun" ThisKey="UrunID" OtherKey="UrunID" Type="Urun" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UrunGrubu" Member="UrunGrubus">
+    <Type Name="UrunGrubu">
+      <Column Name="GrupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GrupAdi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="KategoriID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="UrunGrubu_Urun" Member="Uruns" ThisKey="GrupID" OtherKey="GrupID" Type="Urun" />
+      <Association Name="Kategori_UrunGrubu" Member="Kategori" ThisKey="KategoriID" OtherKey="KategoriID" Type="Kategori" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UrunPuan" Member="UrunPuans">
+    <Type Name="UrunPuan">
+      <Column Name="PuanID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UyeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UrunID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FiyatPuani" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DegerPuani" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="KalitePuani" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Begeni" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Baslik" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Yorum" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Tarih" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Urun_UrunPuan" Member="Urun" ThisKey="UrunID" OtherKey="UrunID" Type="Urun" IsForeignKey="true" />
+      <Association Name="Uye_UrunPuan" Member="Uye" ThisKey="UyeID" OtherKey="UyeID" Type="Uye" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UrunTag" Member="UrunTags">
+    <Type Name="UrunTag">
+      <Column Name="UrunTagID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TagID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UrunID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Tag_UrunTag" Member="Tag" ThisKey="TagID" OtherKey="TagID" Type="Tag" IsForeignKey="true" />
+      <Association Name="Urun_UrunTag" Member="Urun" ThisKey="UrunID" OtherKey="UrunID" Type="Urun" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Uye" Member="Uyes">
+    <Type Name="Uye">
+      <Column Name="UyeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="KullaniciAdi" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Sifre" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Tarih" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Mail" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Songiris" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AdSoyad" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TcKimlik" Type="System.String" DbType="Char(11)" CanBeNull="true" />
+      <Column Name="Engelli" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BlogYazmaDuzenleme" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BlogYonetme" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UrunGirmeDuzenleme" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UrunSilme" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="FaturaIslemleri" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SiteUnsurlari" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Yetkilendirme" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Uye_Blog" Member="Blogs" ThisKey="UyeID" OtherKey="UyeID" Type="Blog" />
+      <Association Name="Uye_BlogYorum" Member="BlogYorums" ThisKey="UyeID" OtherKey="UyeID" Type="BlogYorum" />
+      <Association Name="Uye_UrunPuan" Member="UrunPuans" ThisKey="UyeID" OtherKey="UyeID" Type="UrunPuan" />
+      <Association Name="Musteri_Uye" Member="Musteri" ThisKey="TcKimlik" OtherKey="TcKimlik" Type="Musteri" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
