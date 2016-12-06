@@ -64,6 +64,8 @@
   <ItemGroup>
     <Content Include="AboutUs.aspx" />
     <Content Include="Account.aspx" />
+    <Content Include="AddBlog.aspx" />
+    <Content Include="AddProduct.aspx" />
     <Content Include="AdminPanel.aspx" />
     <Content Include="Blog-Details.aspx" />
     <Content Include="Blog.aspx" />
@@ -92,7 +94,10 @@
     <Content Include="css\owl.carousel.css" />
     <Content Include="css\responsive.css" />
     <Content Include="css\style.css" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="EditBlog.aspx" />
+    <Content Include="EditProduct.aspx" />
     <Content Include="fonts\fontawesome-webfont3295.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="img\about\ab-team1.jpg" />
@@ -218,8 +223,11 @@
     <Content Include="lib\nivo-slider\js\jquery.nivo.slider.js" />
     <Content Include="Liked.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="ManageAccounts.aspx" />
     <Content Include="NotFound404.aspx" />
     <Content Include="product-details.aspx" />
+    <Content Include="ProductValues.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Shop.aspx" />
     <Content Include="Web.config" />
@@ -239,12 +247,33 @@
     <Compile Include="Account.aspx.designer.cs">
       <DependentUpon>Account.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddBlog.aspx.cs">
+      <DependentUpon>AddBlog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddBlog.aspx.designer.cs">
+      <DependentUpon>AddBlog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddProduct.aspx.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddProduct.aspx.designer.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminPanel.aspx.cs">
       <DependentUpon>AdminPanel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AdminPanel.aspx.designer.cs">
       <DependentUpon>AdminPanel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSablon.Master.cs">
+      <DependentUpon>AdminSablon.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminSablon.Master.designer.cs">
+      <DependentUpon>AdminSablon.Master</DependentUpon>
     </Compile>
     <Compile Include="Blog-Details.aspx.cs">
       <DependentUpon>Blog-Details.aspx</DependentUpon>
@@ -281,12 +310,33 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditBlog.aspx.cs">
+      <DependentUpon>EditBlog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditBlog.aspx.designer.cs">
+      <DependentUpon>EditBlog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditProduct.aspx.cs">
+      <DependentUpon>EditProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditProduct.aspx.designer.cs">
+      <DependentUpon>EditProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Liked.aspx.cs">
       <DependentUpon>Liked.aspx</DependentUpon>
@@ -301,6 +351,20 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageAccounts.aspx.cs">
+      <DependentUpon>ManageAccounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageAccounts.aspx.designer.cs">
+      <DependentUpon>ManageAccounts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Modal.designer.cs">
       <AutoGen>True</AutoGen>
@@ -320,6 +384,13 @@
     </Compile>
     <Compile Include="product-details.aspx.designer.cs">
       <DependentUpon>product-details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductValues.aspx.cs">
+      <DependentUpon>ProductValues.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductValues.aspx.designer.cs">
+      <DependentUpon>ProductValues.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.aspx.cs">
@@ -362,6 +433,7 @@
       <LastGenOutput>Modal.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="AdminSablon.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

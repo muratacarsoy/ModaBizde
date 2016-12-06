@@ -331,68 +331,31 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h2>From the blog</h2>
+                        <h2>Blog</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="blog-carousel">
-                    <div class="col-md-4">
-                        <div class="banner-box">
-                            <a href="#" class="image-blog"><img src="img/blog/1.jpg" alt="" /></a>
-                            <div class="single-blog">
-                                <span class="date-time">
-                                    <span class="days">18</span>
-                                    <span class="months">Feb</span>
-                                </span>
-                                <a class="blog-title" href="blog-details.html"><span>voluptatibus maiores aut</span></a>
-                                <p class="author">By BootExperts<span> ( 0 comments )</span></p>
-                                <p class="no-margin">Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores aut find fault with...</p>
+                    <asp:Repeater ID="rptBlog" runat="server" DataSourceID="sdsBlog">
+                        <ItemTemplate>
+                            <div class="col-md-4">
+                                <div class="banner-box">
+                                    <a href="Blog-Details.aspx?BlogId=<%# Eval("BlogID") %>" class="image-blog"><img src="<%# Eval("BlogResmi") %>" alt="" /></a>
+                                    <div class="single-blog">
+                                        <span class="date-time">
+                                            <span class="days"><%# Convert.ToDateTime(Eval("Tarih")).Day %></span>
+                                            <span class="months"><%# Convert.ToDateTime(Eval("Tarih")).ToString("MMM") %></span>
+                                        </span>
+                                        <a class="blog-title" href="Blog-Details.aspx?BlogId=<%# Eval("BlogID") %>"><span><%# Eval("BlogAdi") %></span></a>
+                                        <p class="author"><%# Eval("KullaniciAdi") %> yazdı<span> ( <%# Eval("YorumSayisi") %> yorum )</span></p>
+                                        <p class="no-margin"><%# Eval("OnBilgi") %></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="banner-box">
-                            <a href="#" class="image-blog"><img src="img/blog/2.jpg" alt="" /></a>
-                            <div class="single-blog">
-                                <span class="date-time">
-                                    <span class="days">09</span>
-                                    <span class="months">Jan</span>
-                                </span>
-                                <a class="blog-title" href="blog-details.html"><span>Beguiled  and demoralized</span></a>
-                                <p class="author">By BootExperts<span> ( 0 comments )</span></p>
-                                <p class="no-margin">Laboriosam ipsa temporibus magni assumenda vitae expedita incidunt, aperiam explicabo dignissimos...</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="banner-box">
-                            <a href="#" class="image-blog"><img src="img/blog/3.jpg" alt="" /></a>
-                            <div class="single-blog">
-                                <span class="date-time">
-                            <span class="days">01</span>
-                            <span class="months">Mar</span>
-                                </span>
-                                <a class="blog-title" href="blog-details.html"><span>Lorem ipsum adipisicing </span></a>
-                                <p class="author">By BootExperts<span> ( 0 comments )</span></p>
-                                <p class="no-margin">Consectetur adipisicing elit. Nihil repellat impedit deleniti harum repellendus nobis dolore fuga....</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="banner-box">
-                            <a href="#" class="image-blog"><img src="img/blog/1.jpg" alt="" /></a>
-                            <div class="single-blog">
-                                <span class="date-time">
-                                    <span class="days">28</span>
-                                    <span class="months">Jan</span>
-                                </span>
-                                <a class="blog-title" href="blog-details.html"><span>Repreherit labore totam </span></a>
-                                <p class="author">By BootExperts<span> ( 0 comments )</span></p>
-                                <p class="no-margin">In officia cumque ipsam neque ex non beatae, fugit quo qui error. Consectetur, quibusdam quidem fuga possimus.....</p>
-                            </div>
-                        </div>
-                    </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                    <asp:SqlDataSource runat="server" ID="sdsBlog" ConnectionString='<%$ ConnectionStrings:baglantimetni %>' SelectCommand="sp_SonYazilanBloglar" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
                 </div>
             </div>
         </div>

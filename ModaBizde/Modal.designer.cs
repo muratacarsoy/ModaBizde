@@ -33,6 +33,9 @@ namespace ModaBizde
     partial void InsertBeden(Beden instance);
     partial void UpdateBeden(Beden instance);
     partial void DeleteBeden(Beden instance);
+    partial void InsertBedenvsUrun(BedenvsUrun instance);
+    partial void UpdateBedenvsUrun(BedenvsUrun instance);
+    partial void DeleteBedenvsUrun(BedenvsUrun instance);
     partial void InsertBlog(Blog instance);
     partial void UpdateBlog(Blog instance);
     partial void DeleteBlog(Blog instance);
@@ -69,6 +72,9 @@ namespace ModaBizde
     partial void InsertRenk(Renk instance);
     partial void UpdateRenk(Renk instance);
     partial void DeleteRenk(Renk instance);
+    partial void InsertRenkvsUrun(RenkvsUrun instance);
+    partial void UpdateRenkvsUrun(RenkvsUrun instance);
+    partial void DeleteRenkvsUrun(RenkvsUrun instance);
     partial void InsertSiparisDurum(SiparisDurum instance);
     partial void UpdateSiparisDurum(SiparisDurum instance);
     partial void DeleteSiparisDurum(SiparisDurum instance);
@@ -320,6 +326,8 @@ namespace ModaBizde
 		
 		private string _BedenBoyu;
 		
+		private EntitySet<BedenvsUrun> _BedenvsUruns;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -332,6 +340,7 @@ namespace ModaBizde
 		
 		public Beden()
 		{
+			this._BedenvsUruns = new EntitySet<BedenvsUrun>(new Action<BedenvsUrun>(this.attach_BedenvsUruns), new Action<BedenvsUrun>(this.detach_BedenvsUruns));
 			OnCreated();
 		}
 		
@@ -375,6 +384,19 @@ namespace ModaBizde
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Beden_BedenvsUrun", Storage="_BedenvsUruns", ThisKey="BedenID", OtherKey="BedenID")]
+		public EntitySet<BedenvsUrun> BedenvsUruns
+		{
+			get
+			{
+				return this._BedenvsUruns;
+			}
+			set
+			{
+				this._BedenvsUruns.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -394,18 +416,73 @@ namespace ModaBizde
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_BedenvsUruns(BedenvsUrun entity)
+		{
+			this.SendPropertyChanging();
+			entity.Beden = this;
+		}
+		
+		private void detach_BedenvsUruns(BedenvsUrun entity)
+		{
+			this.SendPropertyChanging();
+			entity.Beden = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BedenvsUrun")]
-	public partial class BedenvsUrun
+	public partial class BedenvsUrun : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _BedenUrunID;
 		
 		private System.Nullable<int> _BedenID;
 		
 		private System.Nullable<int> _UrunID;
 		
+		private EntityRef<Beden> _Beden;
+		
+		private EntityRef<Urun> _Urun;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBedenUrunIDChanging(int value);
+    partial void OnBedenUrunIDChanged();
+    partial void OnBedenIDChanging(System.Nullable<int> value);
+    partial void OnBedenIDChanged();
+    partial void OnUrunIDChanging(System.Nullable<int> value);
+    partial void OnUrunIDChanged();
+    #endregion
+		
 		public BedenvsUrun()
 		{
+			this._Beden = default(EntityRef<Beden>);
+			this._Urun = default(EntityRef<Urun>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BedenUrunID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int BedenUrunID
+		{
+			get
+			{
+				return this._BedenUrunID;
+			}
+			set
+			{
+				if ((this._BedenUrunID != value))
+				{
+					this.OnBedenUrunIDChanging(value);
+					this.SendPropertyChanging();
+					this._BedenUrunID = value;
+					this.SendPropertyChanged("BedenUrunID");
+					this.OnBedenUrunIDChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BedenID", DbType="Int")]
@@ -419,7 +496,15 @@ namespace ModaBizde
 			{
 				if ((this._BedenID != value))
 				{
+					if (this._Beden.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBedenIDChanging(value);
+					this.SendPropertyChanging();
 					this._BedenID = value;
+					this.SendPropertyChanged("BedenID");
+					this.OnBedenIDChanged();
 				}
 			}
 		}
@@ -435,8 +520,104 @@ namespace ModaBizde
 			{
 				if ((this._UrunID != value))
 				{
+					if (this._Urun.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUrunIDChanging(value);
+					this.SendPropertyChanging();
 					this._UrunID = value;
+					this.SendPropertyChanged("UrunID");
+					this.OnUrunIDChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Beden_BedenvsUrun", Storage="_Beden", ThisKey="BedenID", OtherKey="BedenID", IsForeignKey=true)]
+		public Beden Beden
+		{
+			get
+			{
+				return this._Beden.Entity;
+			}
+			set
+			{
+				Beden previousValue = this._Beden.Entity;
+				if (((previousValue != value) 
+							|| (this._Beden.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Beden.Entity = null;
+						previousValue.BedenvsUruns.Remove(this);
+					}
+					this._Beden.Entity = value;
+					if ((value != null))
+					{
+						value.BedenvsUruns.Add(this);
+						this._BedenID = value.BedenID;
+					}
+					else
+					{
+						this._BedenID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Beden");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Urun_BedenvsUrun", Storage="_Urun", ThisKey="UrunID", OtherKey="UrunID", IsForeignKey=true)]
+		public Urun Urun
+		{
+			get
+			{
+				return this._Urun.Entity;
+			}
+			set
+			{
+				Urun previousValue = this._Urun.Entity;
+				if (((previousValue != value) 
+							|| (this._Urun.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Urun.Entity = null;
+						previousValue.BedenvsUruns.Remove(this);
+					}
+					this._Urun.Entity = value;
+					if ((value != null))
+					{
+						value.BedenvsUruns.Add(this);
+						this._UrunID = value.UrunID;
+					}
+					else
+					{
+						this._UrunID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Urun");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -1131,6 +1312,8 @@ namespace ModaBizde
 		
 		private System.Nullable<System.DateTime> _Tarih;
 		
+		private System.Nullable<bool> _Onaylanma;
+		
 		private EntityRef<Blog> _Blog;
 		
 		private EntityRef<Uye> _Uye;
@@ -1149,6 +1332,8 @@ namespace ModaBizde
     partial void OnYorumChanged();
     partial void OnTarihChanging(System.Nullable<System.DateTime> value);
     partial void OnTarihChanged();
+    partial void OnOnaylanmaChanging(System.Nullable<bool> value);
+    partial void OnOnaylanmaChanged();
     #endregion
 		
 		public BlogYorum()
@@ -1262,6 +1447,26 @@ namespace ModaBizde
 					this._Tarih = value;
 					this.SendPropertyChanged("Tarih");
 					this.OnTarihChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Onaylanma", DbType="Bit")]
+		public System.Nullable<bool> Onaylanma
+		{
+			get
+			{
+				return this._Onaylanma;
+			}
+			set
+			{
+				if ((this._Onaylanma != value))
+				{
+					this.OnOnaylanmaChanging(value);
+					this.SendPropertyChanging();
+					this._Onaylanma = value;
+					this.SendPropertyChanged("Onaylanma");
+					this.OnOnaylanmaChanged();
 				}
 			}
 		}
@@ -2628,6 +2833,8 @@ namespace ModaBizde
 		
 		private string _RenkAdi;
 		
+		private EntitySet<RenkvsUrun> _RenkvsUruns;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2640,6 +2847,7 @@ namespace ModaBizde
 		
 		public Renk()
 		{
+			this._RenkvsUruns = new EntitySet<RenkvsUrun>(new Action<RenkvsUrun>(this.attach_RenkvsUruns), new Action<RenkvsUrun>(this.detach_RenkvsUruns));
 			OnCreated();
 		}
 		
@@ -2683,6 +2891,19 @@ namespace ModaBizde
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Renk_RenkvsUrun", Storage="_RenkvsUruns", ThisKey="RenkID", OtherKey="RenkID")]
+		public EntitySet<RenkvsUrun> RenkvsUruns
+		{
+			get
+			{
+				return this._RenkvsUruns;
+			}
+			set
+			{
+				this._RenkvsUruns.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2702,18 +2923,73 @@ namespace ModaBizde
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_RenkvsUruns(RenkvsUrun entity)
+		{
+			this.SendPropertyChanging();
+			entity.Renk = this;
+		}
+		
+		private void detach_RenkvsUruns(RenkvsUrun entity)
+		{
+			this.SendPropertyChanging();
+			entity.Renk = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RenkvsUrun")]
-	public partial class RenkvsUrun
+	public partial class RenkvsUrun : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RenkUrunID;
 		
 		private System.Nullable<int> _RenkID;
 		
 		private System.Nullable<int> _UrunID;
 		
+		private EntityRef<Renk> _Renk;
+		
+		private EntityRef<Urun> _Urun;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRenkUrunIDChanging(int value);
+    partial void OnRenkUrunIDChanged();
+    partial void OnRenkIDChanging(System.Nullable<int> value);
+    partial void OnRenkIDChanged();
+    partial void OnUrunIDChanging(System.Nullable<int> value);
+    partial void OnUrunIDChanged();
+    #endregion
+		
 		public RenkvsUrun()
 		{
+			this._Renk = default(EntityRef<Renk>);
+			this._Urun = default(EntityRef<Urun>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenkUrunID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RenkUrunID
+		{
+			get
+			{
+				return this._RenkUrunID;
+			}
+			set
+			{
+				if ((this._RenkUrunID != value))
+				{
+					this.OnRenkUrunIDChanging(value);
+					this.SendPropertyChanging();
+					this._RenkUrunID = value;
+					this.SendPropertyChanged("RenkUrunID");
+					this.OnRenkUrunIDChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenkID", DbType="Int")]
@@ -2727,7 +3003,15 @@ namespace ModaBizde
 			{
 				if ((this._RenkID != value))
 				{
+					if (this._Renk.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRenkIDChanging(value);
+					this.SendPropertyChanging();
 					this._RenkID = value;
+					this.SendPropertyChanged("RenkID");
+					this.OnRenkIDChanged();
 				}
 			}
 		}
@@ -2743,8 +3027,104 @@ namespace ModaBizde
 			{
 				if ((this._UrunID != value))
 				{
+					if (this._Urun.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUrunIDChanging(value);
+					this.SendPropertyChanging();
 					this._UrunID = value;
+					this.SendPropertyChanged("UrunID");
+					this.OnUrunIDChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Renk_RenkvsUrun", Storage="_Renk", ThisKey="RenkID", OtherKey="RenkID", IsForeignKey=true)]
+		public Renk Renk
+		{
+			get
+			{
+				return this._Renk.Entity;
+			}
+			set
+			{
+				Renk previousValue = this._Renk.Entity;
+				if (((previousValue != value) 
+							|| (this._Renk.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Renk.Entity = null;
+						previousValue.RenkvsUruns.Remove(this);
+					}
+					this._Renk.Entity = value;
+					if ((value != null))
+					{
+						value.RenkvsUruns.Add(this);
+						this._RenkID = value.RenkID;
+					}
+					else
+					{
+						this._RenkID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Renk");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Urun_RenkvsUrun", Storage="_Urun", ThisKey="UrunID", OtherKey="UrunID", IsForeignKey=true)]
+		public Urun Urun
+		{
+			get
+			{
+				return this._Urun.Entity;
+			}
+			set
+			{
+				Urun previousValue = this._Urun.Entity;
+				if (((previousValue != value) 
+							|| (this._Urun.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Urun.Entity = null;
+						previousValue.RenkvsUruns.Remove(this);
+					}
+					this._Urun.Entity = value;
+					if ((value != null))
+					{
+						value.RenkvsUruns.Add(this);
+						this._UrunID = value.UrunID;
+					}
+					else
+					{
+						this._UrunID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Urun");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -3183,9 +3563,13 @@ namespace ModaBizde
 		
 		private System.Nullable<double> _KalitePuani;
 		
+		private EntitySet<BedenvsUrun> _BedenvsUruns;
+		
 		private EntitySet<FaturaDetay> _FaturaDetays;
 		
 		private EntitySet<OneCikanUrunler> _OneCikanUrunlers;
+		
+		private EntitySet<RenkvsUrun> _RenkvsUruns;
 		
 		private EntitySet<UrunGorseli> _UrunGorselis;
 		
@@ -3237,8 +3621,10 @@ namespace ModaBizde
 		
 		public Urun()
 		{
+			this._BedenvsUruns = new EntitySet<BedenvsUrun>(new Action<BedenvsUrun>(this.attach_BedenvsUruns), new Action<BedenvsUrun>(this.detach_BedenvsUruns));
 			this._FaturaDetays = new EntitySet<FaturaDetay>(new Action<FaturaDetay>(this.attach_FaturaDetays), new Action<FaturaDetay>(this.detach_FaturaDetays));
 			this._OneCikanUrunlers = new EntitySet<OneCikanUrunler>(new Action<OneCikanUrunler>(this.attach_OneCikanUrunlers), new Action<OneCikanUrunler>(this.detach_OneCikanUrunlers));
+			this._RenkvsUruns = new EntitySet<RenkvsUrun>(new Action<RenkvsUrun>(this.attach_RenkvsUruns), new Action<RenkvsUrun>(this.detach_RenkvsUruns));
 			this._UrunGorselis = new EntitySet<UrunGorseli>(new Action<UrunGorseli>(this.attach_UrunGorselis), new Action<UrunGorseli>(this.detach_UrunGorselis));
 			this._UrunPuans = new EntitySet<UrunPuan>(new Action<UrunPuan>(this.attach_UrunPuans), new Action<UrunPuan>(this.detach_UrunPuans));
 			this._UrunTags = new EntitySet<UrunTag>(new Action<UrunTag>(this.attach_UrunTags), new Action<UrunTag>(this.detach_UrunTags));
@@ -3575,6 +3961,19 @@ namespace ModaBizde
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Urun_BedenvsUrun", Storage="_BedenvsUruns", ThisKey="UrunID", OtherKey="UrunID")]
+		public EntitySet<BedenvsUrun> BedenvsUruns
+		{
+			get
+			{
+				return this._BedenvsUruns;
+			}
+			set
+			{
+				this._BedenvsUruns.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Urun_FaturaDetay", Storage="_FaturaDetays", ThisKey="UrunID", OtherKey="UrunId")]
 		public EntitySet<FaturaDetay> FaturaDetays
 		{
@@ -3598,6 +3997,19 @@ namespace ModaBizde
 			set
 			{
 				this._OneCikanUrunlers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Urun_RenkvsUrun", Storage="_RenkvsUruns", ThisKey="UrunID", OtherKey="UrunID")]
+		public EntitySet<RenkvsUrun> RenkvsUruns
+		{
+			get
+			{
+				return this._RenkvsUruns;
+			}
+			set
+			{
+				this._RenkvsUruns.Assign(value);
 			}
 		}
 		
@@ -3728,6 +4140,18 @@ namespace ModaBizde
 			}
 		}
 		
+		private void attach_BedenvsUruns(BedenvsUrun entity)
+		{
+			this.SendPropertyChanging();
+			entity.Urun = this;
+		}
+		
+		private void detach_BedenvsUruns(BedenvsUrun entity)
+		{
+			this.SendPropertyChanging();
+			entity.Urun = null;
+		}
+		
 		private void attach_FaturaDetays(FaturaDetay entity)
 		{
 			this.SendPropertyChanging();
@@ -3747,6 +4171,18 @@ namespace ModaBizde
 		}
 		
 		private void detach_OneCikanUrunlers(OneCikanUrunler entity)
+		{
+			this.SendPropertyChanging();
+			entity.Urun = null;
+		}
+		
+		private void attach_RenkvsUruns(RenkvsUrun entity)
+		{
+			this.SendPropertyChanging();
+			entity.Urun = this;
+		}
+		
+		private void detach_RenkvsUruns(RenkvsUrun entity)
 		{
 			this.SendPropertyChanging();
 			entity.Urun = null;

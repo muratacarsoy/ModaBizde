@@ -52,7 +52,7 @@ function showCart() {
                 toplam = this.tamtoplam; urun_sayisi++;
             });
             cart_home_four_inner_html = '<li><a class="cart" href="Cart.aspx"><span>' + urun_sayisi +
-                '</span>Cart:' + toplam + ' &#8378 </a><div class="mini-cart-content">' +
+                '</span>Sepet:' + toplam + ' &#8378 </a><div class="mini-cart-content">' +
                 '<div class="cart-products-list">' + cart_products_inner_html + '</div>' +
                 '<div class="cart-price-list"><p class="price-amount">Toplam : <span>' + toplam +
                 ' &#8378 </span></p><div class="cart-buttons"><a href="Checkout.aspx">Satın Al</a></div></div></div></li>';

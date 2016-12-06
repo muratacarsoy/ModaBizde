@@ -37,6 +37,7 @@ namespace ModaBizde
                 sorgu.Fill(tablo);
                 string urun_adi = tablo.Rows[0]["UrunAdi"].ToString();
                 zoom1.Src = tablo.Rows[0]["GorselAdres"].ToString();
+                zoom1.Attributes["data-zoom-image"] = tablo.Rows[0]["GorselAdres"].ToString();
                 UrunBasligi.InnerText = urun_adi;
                 GoruntulemeSayisi.InnerText = tablo.Rows[0]["GoruntulenmeSayisi"].ToString();
                 BegeniSayisi.InnerText = tablo.Rows[0]["Begeniler"] == null ? "0" : tablo.Rows[0]["Begeniler"].ToString();
@@ -166,7 +167,7 @@ namespace ModaBizde
             string ret = "";
             foreach (string[] sl in data)
             {
-                string yorum = "<div class=\"user-comment-form-area\">" + 
+                string yorum = "<div class=\"user-comment-form-area\">" +
                     "<div class=\"comment\">" +
                         "<div class=\"comment-author\"><p>" + sl[0] + "</p></div>" +
                         "<div class=\"comment-author-info\"><strong>" + sl[1] + "</strong></div>" +

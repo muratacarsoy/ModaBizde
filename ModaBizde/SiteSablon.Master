@@ -153,102 +153,6 @@
                                 <div class="mainmenu">
                                     <nav>
                                         <ul id="nav" runat="server">
-                                            <li class="current">
-                                                <a href="Default.aspx">Ana Sayfa</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="#" class="mega-title">Diğer Sayfalar</a></li>
-                                                    <li><a href="Contact.aspx">İletişim</a></li>
-                                                    <li><a href="AboutUs.aspx">Hakkımızda</a></li>
-                                                    <li><a href="Blog.aspx">Blog</a></li>
-                                                    <li><a href="Account.aspx">Hesabım</a></li>
-                                                    <li><a href="Cart.aspx">Sepetim</a></li>
-                                                    <li><a href="Checkout.aspx">Satın Al</a></li>
-                                                    <li><a href="Shop.aspx">Ürün Ara</a></li>
-                                                    <li><a href="Liked.aspx">Beğendiklerim</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="shop-grid.html">Women</a>
-                                                <div class="megamenu">
-                                                    <div class="megamenu-list clearfix">
-                                                        <span>
-                                                            <a href="#" class="mega-title">Clothing</a>
-                                                            <a href="#">Blazers</a>
-                                                            <a href="#">Jackets</a>
-                                                            <a href="#">Collections</a>
-                                                            <a href="#">T-Shirts</a>
-                                                        </span>
-                                                        <span>
-                                                            <a href="#" class="mega-title">Dresses</a>
-                                                            <a href="#">Cocktail</a>
-                                                            <a href="#">Sunglass</a>
-                                                            <a href="#">Evening</a>
-                                                            <a href="#">Footwear</a>
-                                                        </span>
-                                                        <span>
-                                                            <a href="#" class="mega-title">Handbags</a>
-                                                            <a href="#">Bootees Bags</a>
-                                                            <a href="#">Furniture</a>
-                                                            <a href="#">Exclusive</a>
-                                                            <a href="#">Jackets</a>
-                                                        </span>
-                                                        <span class="no-margin">
-                                                            <a href="#" class="mega-title">Jewellery</a>
-                                                            <a href="#">Earrings</a>
-                                                            <a href="#">Nosepins</a>
-                                                            <a href="#">Braclets</a>
-                                                            <a href="#">Bangels</a>
-                                                        </span>
-                                                        <span class="no-margin">
-                                                            <a href="#" class="mega-banner">
-                                                                <img src="img/mega-banner.jpg" alt="" />
-                                                            </a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="shop-grid.html">Men</a>
-                                                <div class="megamenu">
-                                                    <div class="megamenu-list clearfix">
-                                                        <span>
-                                                            <a href="#" class="mega-title">Clothing</a>
-                                                            <a href="#">Blazers</a>
-                                                            <a href="#">Jackets</a>
-                                                            <a href="#">Collections</a>
-                                                            <a href="#">T-Shirts</a>
-                                                        </span>
-                                                        <span>
-                                                            <a href="#" class="mega-title">Dresses</a>
-                                                            <a href="#">Cocktail</a>
-                                                            <a href="#">Sunglass</a>
-                                                            <a href="#">Evening</a>
-                                                            <a href="#">Footwear</a>
-                                                        </span>
-                                                        <span>
-                                                            <a href="#" class="mega-title">Handbags</a>
-                                                            <a href="#">Bootees Bags</a>
-                                                            <a href="#">Furniture</a>
-                                                            <a href="#">Exclusive</a>
-                                                            <a href="#">Jackets</a>
-                                                        </span>
-                                                        <span class="no-margin">
-                                                            <a href="#" class="mega-title">Jewellery</a>
-                                                            <a href="#">Earrings</a>
-                                                            <a href="#">Nosepins</a>
-                                                            <a href="#">Braclets</a>
-                                                            <a href="#">Bangels</a>
-                                                        </span>
-                                                        <span class="no-margin">
-                                                            <a href="#" class="mega-banner">
-                                                                <img src="img/mega-banner.jpg" alt="">
-                                                            </a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li><a href="shop-grid.html">Footwear</a></li>
-                                            <li><a href="Contact.aspx">İletişim</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -263,7 +167,7 @@
                                 <ul class="header-r-cart cart-home-four">
                                     <li>
                                         <% System.Data.DataTable tablo = (System.Data.DataTable)HttpContext.Current.Session["sepet"]; %>
-                                        <a class="cart" href="Cart.aspx"><span><% Response.Write(tablo==null?0:tablo.Rows.Count); %></span>Cart: 
+                                        <a class="cart" href="Cart.aspx"><span><% Response.Write(tablo==null?0:tablo.Rows.Count); %></span>Sepet: 
                                             <%  double toplam = 0;
                                                 for (int i = 0; i < (tablo==null?0:tablo.Rows.Count); i++)
                                                     toplam += Convert.ToDouble(tablo.Rows[i]["Fiyat"]) * Convert.ToDouble(tablo.Rows[i]["Miktar"]);
@@ -304,7 +208,7 @@
                                                     <%  toplam = 0;
                                                 for (int i = 0; i < (tablo == null ? 0 : tablo.Rows.Count); i++)
                                                     toplam += Convert.ToDouble(tablo.Rows[i]["Fiyat"]) * Convert.ToDouble(tablo.Rows[i]["Miktar"]);
-                                                Response.Write(toplam);                                                                                          
+                                                Response.Write(toplam);
                                                 %> &#8378 </span> </p>
                                                 <div class="cart-buttons">
                                                     <a href="Checkout.aspx">Satın Al</a>
@@ -313,10 +217,6 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <div class="search-content">
-                                    <input type="text" id="search-input-four" name="search">
-                                    <button class="button" type="submit"><i class="fa fa-search"></i></button>
-                                </div>
                             </div>
                         </div>
                     </div>

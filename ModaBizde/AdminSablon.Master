@@ -1,0 +1,163 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminSablon.master.cs" Inherits="ModaBizde.AdminSablon" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>MODABIZDE.COM</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="Giyimle alakalı tüm seçenekleri vardır." />
+    <%--Alttaki kod satırı tüm cihazlarda düzenli olarak görünmesini saglar--%>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,900,700,700italic,300' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="lib/nivo-slider/css/nivo-slider.css" type="text/css" />
+    <link rel="stylesheet" href="lib/nivo-slider/css/preview.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/owl.carousel.css" />
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+    <link rel="stylesheet" href="css/meanmenu.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header>
+            <div class="header-top-home-four">
+                <div class="container">
+                    <div class="header-container">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-7">
+                                <div class="header-contact">
+                                    <span class="email">Email: murat.acarsoy@gmail.com </span>/ <span class="phone">GSM: 537 672 29 77</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-5">
+                                <div class="currency-language">
+                                    <div class="language-menu">
+                                        <ul>
+                                            <li>
+                                                <a href="#">Türkçe <i class="fa fa-angle-down"></i></a>
+                                                <ul class="language-dropdown">
+                                                    <li><a href="#">Türkçe</a></li>
+                                                    <li><a href="#">English</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="account-menu" id="KullaniciPaneli" runat="server">
+                                        <ul>
+                                            <li>
+                                                <a href="#">Merhaba <span id="sKullanici" runat="server"></span><i class="fa fa-angle-down"></i></a>
+                                                <ul class="account-dropdown">
+                                                    <li><a href="Account.aspx">Hesabım</a></li>
+                                                    <li><a href="History.aspx">Satın Aldıklarım</a></li>
+                                                    <li><a href="Cart.aspx">Sepetim</a></li>
+                                                    <li><a href="Checkout.aspx">Satın Al</a></li>
+                                                    <li><a href="Blog.aspx">Blog</a></li>
+                                                    <li><a href="Logout.aspx">Çıkış Yap</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mainmenu-area home-four-menu">
+                <div id="sticker"> 
+                    <div class="container">
+                        <div class="row">   
+                            <div class="col-lg-7 col-md-7 hidden-sm hidden-xs">
+                                <div class="mainmenu">
+                                    <nav>
+                                        <ul id="nav">
+                                            <li class="current"><a href="index.html">Ürünler</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="AddProduct.aspx">Ürün Ekle</a></li>
+                                                    <li><a href="EditProduct.aspx">Ürün Düzenle</a></li>
+                                                    <li><a href="ProductValues.aspx">Ürün Değerleri</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="EditBlog.aspx">Blog</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="AddBlog.aspx">Yazı Ekle</a></li>
+                                                    <li><a href="EditBlog.aspx">Yazıları Yönet</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="ManageAccounts.aspx">Üyeler</a></li>
+                                            <li><a href="Dashboard.aspx">Faturalar</a></li>
+                                            <li><a href="Default.aspx">Ana Sayfa</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>        
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        </header>
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+    <!-- jquery
+    ============================================ -->
+    <script src="js/vendor/jquery-1.11.3.min.js"></script>
+
+    <!-- bootstrap JS
+    ============================================ -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- nivo slider js
+    ============================================ -->
+    <script src="lib/nivo-slider/js/jquery.nivo.slider.js" type="text/javascript"></script>
+    <script src="lib/nivo-slider/home.js" type="text/javascript"></script>
+
+    <!-- wow JS
+    ============================================ -->
+    <script src="js/wow.min.js"></script>
+
+    <!-- meanmenu JS
+    ============================================ -->
+    <script src="js/jquery.meanmenu.js"></script>
+
+    <!-- owl.carousel JS
+    ============================================ -->
+    <script src="js/owl.carousel.min.js"></script>
+
+    <!-- price-slider JS
+    ============================================ -->
+    <script src="js/jquery-price-slider.js"></script>
+
+    <!-- scrollUp JS
+    ============================================ -->
+    <script src="js/jquery.scrollUp.min.js"></script>
+
+    <!--Countdown js-->
+    <script src="js/jquery.countdown.min.js"></script>
+
+    <!-- Sticky Menu JS
+    ============================================ -->
+    <script src="js/jquery.sticky.js"></script>
+
+    <script src="js/jquery.elevateZoom-3.0.8.min.js"></script>
+
+    <script src="js/plugins.js"></script>
+
+    <script src="js/main.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</body>
+</html>

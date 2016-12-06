@@ -9,6 +9,7 @@
   </Table>
   <Table Name="dbo.BedenvsUrun" Member="BedenvsUruns">
     <Type Name="BedenvsUrun">
+      <Column Name="BedenUrunID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="BedenID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UrunID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Beden_BedenvsUrun" Member="Beden" ThisKey="BedenID" OtherKey="BedenID" Type="Beden" IsForeignKey="true" />
@@ -54,6 +55,7 @@
       <Column Name="UyeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Yorum" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Tarih" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Onaylanma" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Blog_BlogYorum" Member="Blog" ThisKey="BlogID" OtherKey="BlogID" Type="Blog" IsForeignKey="true" />
       <Association Name="Uye_BlogYorum" Member="Uye" ThisKey="UyeID" OtherKey="UyeID" Type="Uye" IsForeignKey="true" />
     </Type>
@@ -132,6 +134,7 @@
   </Table>
   <Table Name="dbo.RenkvsUrun" Member="RenkvsUruns">
     <Type Name="RenkvsUrun">
+      <Column Name="RenkUrunID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RenkID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UrunID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Renk_RenkvsUrun" Member="Renk" ThisKey="RenkID" OtherKey="RenkID" Type="Renk" IsForeignKey="true" />

@@ -50,7 +50,7 @@
                                 <h1>Checkout</h1>
                             </div>
                             <div class="contact-form">
-                                <span class="legend">Contact Information</span>
+                                <span class="legend">İletişim Bilgileri</span>
                                 <div class="form-top">
                                     <div class="form-group col-sm-6 col-md-6 col-lg-6">
                                         <label>İsim<span class="" title="">*</span></label>

@@ -29,7 +29,7 @@
                             <div class="zoomWrapper">
                                 <div id="img-1" class="zoomWrapper single-zoom">
                                     <a href="#">
-                                        <img id="zoom1" runat="server" src="img/product/20.jpg" data-zoom-image="img/product/20.jpg" alt="big-1" />
+                                        <img id="zoom1" runat="server" src="img/product/20.jpg" data-zoom-image="img/product/20.jpg" alt="big-1" class="zoomClass"/>
                                     </a>
                                 </div>
                                 <div class="product-thumb row">
@@ -37,7 +37,7 @@
                                         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
                                             <ItemTemplate>
                                                 <li class="col-md-4">
-                                                    <a class="elevatezoom-gallery" href="#" data-image="img/product/20.jpg" data-zoom-image="img/product/20.jpg">
+                                                    <a class="elevatezoom-gallery" href="#" data-image="<%# Eval("GorselAdres") %>" data-zoom-image="<%# Eval("GorselAdres") %>" onmousemove=" $('.zoomClass').attr('src', '<%# Eval("GorselAdres") %>'); ">
                                                         <img src="<%# Eval("GorselAdres") %>" alt=""/></a>
                                                 </li>
                                             </ItemTemplate>

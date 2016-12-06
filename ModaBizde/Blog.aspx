@@ -49,7 +49,7 @@
                                         <ItemTemplate>
                                             <li>
                                                 <div class="post-thumb"><a href="Blog-Details.aspx?BlogId=<%# Eval("BlogID") %>"><img src="<%# Eval("BlogResmi") %>" alt="" /></a></div>
-                                                <div class="post-info"><a href="Blog-Details.aspx?BlogId=<%# Eval("BlogID") %>"><%# Eval("BlogAdi") %></a><span><%# Eval("Tarih") %></span></div></li>
+                                                <div class="post-info"><a href="Blog-Details.aspx?BlogId=<%# Eval("BlogID") %>"><%# Eval("BlogAdi") %></a><span><%# Convert.ToDateTime(Eval("Tarih")).ToString("dd MMM yyyy") %></span></div></li>
                                         </ItemTemplate>
                                     </asp:Repeater>
                                     <asp:SqlDataSource runat="server" ID="sqlSonEklenenler" ConnectionString='<%$ ConnectionStrings:baglantimetni %>' SelectCommand="select top 3 BlogID, BlogAdi, BlogResmi, Tarih from Blog order by Tarih desc"></asp:SqlDataSource>
@@ -75,6 +75,7 @@
                                 <div class="section-title"><h2>Blog Arşivi</h2></div>
                                 <div class="sidebar-category-list">
                                     <ul>
+                                        <li><a href="Blog.aspx?arch=1-17">Ocak 2017</a></li>
                                         <li><a href="Blog.aspx?arch=12-16">Aralık 2016</a></li>
                                         <li><a href="Blog.aspx?arch=11-16">Kasım 2016</a></li>
                                         <li><a href="Blog.aspx?arch=10-16">Ekim 2016</a></li>
@@ -93,7 +94,7 @@
                                             <li><a href="#">2</a></li>
                                             <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
                                         </ul>
-                                        <span><strong>Page: </strong></span>
+                                        <span><strong>Sayfa: </strong></span>
                                     </div>
                                 </div>
                             </div>
